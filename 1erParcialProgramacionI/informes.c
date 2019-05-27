@@ -187,7 +187,6 @@ void harcodeo(Orquesta *orquesta, Instrumento *instrumento, Musico *musico, int 
 * \param size int Tamaño del array
 * \param orderFirst int Determina si el orden del primer criterio es ascendete o descendente
 * \param orderSecond int Determina si el orden del segunbdo criterio es ascendete o descendente
-* \param size int Tamaño del array
 * \return int Return (-1) si Error [largo no valido o NULL pointer] - (0) si se ordena exitosamente
 *
 */
@@ -231,21 +230,33 @@ int musico_ordenarPorDobleCriterio(Musico *arrayMusico,int size, int orderFirst,
     return retorno;
 }
 
-
+/** \brief Inicializa el campo isEmpty en 1(vacio)
+* \param arrayContadorMusicos Array de contadorMusico
+* \param cantidad es el tamaño del array
+* \return int Return (-1) si Error [largo no valido o NULL pointer] - (0) si se inicializa correctamente
+*
+*/
 int inf_InicializarCantidadMusico(ContadorMusicos *arrayContadorMusicos, int cantidad)
 {
     int retorno = -1;
     int i;
-
-    for (i = 0; i < cantidad; i++)
+    if(arrayContadorMusicos != NULL && cantidad > 0)
     {
-        arrayContadorMusicos[i].isEmpty = 1;
-        retorno=0;
+        for (i = 0; i < cantidad; i++)
+        {
+            arrayContadorMusicos[i].isEmpty = 1;
+            retorno=0;
+        }
     }
-
     return retorno;
 }
 
+/** \brief Inicializa el campo cantMusico en 0(vacio)
+* \param arrayContadorMusicos Array de contadorMusico
+* \param cantidad es el tamaño del array
+* \return int Return (-1) si Error [largo no valido o NULL pointer] - (0) si se inicializa correctamente
+*
+*/
 int inf_Inicializar(ContadorMusicos *arrayContadorMusico, int cantidad)
 {
     int retorno = -1;
@@ -260,6 +271,15 @@ int inf_Inicializar(ContadorMusicos *arrayContadorMusico, int cantidad)
     return retorno;
 }
 
+/** \brief busca en el array de contadorMusicos la posicion correcta para una
+            orquesta recibida o crea una nueva si no esta guardada
+* \param arrayContadorMusicos Array de contadorMusico
+* \param int posicionResultante guarda la posicion del array a escribir
+* \param cantidadOrquesta es el tamaño del array
+* \param int idOrquesta recibe el idOrquesta a buscar si esta guardado
+* \return int Return (-1) si Error [largo no valido o NULL pointer] - (0) si se encuentra una posicion correctamente
+*
+*/
 int inf_posicionArrayContador(ContadorMusicos *arrayContadorMusicos, int *posicionResultante, int cantidadOrquesta, int idOrquesta)
 {
     int retorno = -1;
@@ -293,7 +313,17 @@ int inf_posicionArrayContador(ContadorMusicos *arrayContadorMusicos, int *posici
     return retorno;
 }
 
-
+/** \brief  cuenta La cantidad de musicos que hay por orquesta y lo guarda en
+            una nueva entidad
+* \param arrayContadorMusicos Array de contadorMusico
+* \param arrayOrquesta array de Orquesta
+* \param arrayMusico array de Musico
+* \param cantidadMusico tamaño de array de Musico
+* \param cantidadOrquesta tamaño de array de Orquesta
+* \return   int Return (-1) si Error [largo no valido o NULL pointer] -
+            (0) si se realiza el conteo correctamente
+*
+*/
 int inf_contadorMusicosOrquesta(ContadorMusicos *arrayContadorMusicos,
                                 Orquesta *arrayOrquesta,
                                 Musico *arrayMusico,
