@@ -359,22 +359,30 @@ int inf_contadorMusicosOrquesta(ContadorMusicos *arrayContadorMusicos,
     }
     return retorno;
 }
-
+/** \brief  se ingresa un nombre de un lugar, busca las orquestas
+            pertenecientes y las lista
+* \param arrayOrquesta Array de Orquesta
+* \param arrayOrquesta array de Orquesta
+* \param cantidadOrquesta tamaño de array de Orquesta
+* \return   int Return (-1) si Error [largo no valido o NULL pointer] -
+            (0) si lista al menos una orquesta correctamente - (-2) si
+            no encuentra el lugar ingrersado
+*
+*/
 int inf_orquestasDeUnLugar(Orquesta *arrayOrquesta, int cantidadOrquesta)
 {
     int retorno = -1;
     char auxLugar[30];
     int auxFlag;
-
     int i;
 
     utn_getName("\nIngrese un lugar: \n", "\nError, dato no valido", 3, 30,2, auxLugar);
 
     if(arrayOrquesta != NULL && cantidadOrquesta > 0)
     {
+        auxFlag = 1;
         for(i=0;i<cantidadOrquesta;i++)
         {
-            auxFlag = 1;
             if(strcmp(auxLugar, arrayOrquesta[i].lugar) == 0 && arrayOrquesta[i].isEmpty == 0)
             {
                 auxFlag = 0;
@@ -393,26 +401,46 @@ int inf_orquestasDeUnLugar(Orquesta *arrayOrquesta, int cantidadOrquesta)
                         printf("Tipo: 3-Camara\n\n");
                         break;
                 }
+                retorno = 0;
             }
             else
             {
-                if(!auxFlag)
+                if(auxFlag)
+                {
                     printf("No hubo coincidencia\n\n");
+                    retorno = -2;
+                }
                 break;
             }
 
 
         }
-        retorno = 0;
     }
     return retorno;
 }
-
-int inf_menosDe25(Musico *arrayMusico, Orquesta *arrayOrquesta, Instrumento *arrayInstrumento, int cantidadMusico,int cantidadOrquesta,int cantidadInstrumento)
+/** \brief  Lista los musicos con menos de 25 años
+* \param arrayMusico Array de Musico
+* \param arrayOrquesta array de Orquesta
+* \param arrayInstrumentoi array de Instrumento
+* \param cantidadMusico tamaño de array de Musico
+* \param cantidadOrquesta tamaño de array de Orquesta
+* \param cantidadInstrumento tamaño de array de Instrumento
+* \return   int Return (-1) si Error [largo no valido o NULL pointer] -
+            (0) si lista al menos un musico correctamente - (-2) si
+            no encuentra ninguno
+*
+*/
+int inf_menosDe25(  Musico *arrayMusico,
+                    Orquesta *arrayOrquesta,
+                    Instrumento *arrayInstrumento,
+                    int cantidadMusico,
+                    int cantidadOrquesta,
+                    int cantidadInstrumento)
 {
     int retorno = -1;
     int auxPosInstrumento;
     int auxPosOrquesta;
+    int auxFlag;
 
     int i;
 
@@ -423,12 +451,14 @@ int inf_menosDe25(Musico *arrayMusico, Orquesta *arrayOrquesta, Instrumento *arr
         cantidadOrquesta > 0 &&
         cantidadInstrumento > 0)
     {
+        auxFlag = 1;
         for(i = 0;i < cantidadMusico; i++)
         {
             if(arrayMusico[i].isEmpty == 0)
             {
                 if(arrayMusico[i].edad < 25 )
                 {
+                    auxFlag = 0;
                     printf("ID de musico: %d\n", arrayMusico[i].idMusico);
                     printf("Nombre: %s\n", arrayMusico[i].nombre);
                     printf("Apellido: %s\n", arrayMusico[i].apellido);
@@ -437,14 +467,26 @@ int inf_menosDe25(Musico *arrayMusico, Orquesta *arrayOrquesta, Instrumento *arr
                     printf("Instrumento: %s\n", arrayInstrumento[auxPosInstrumento].nombre);
                     orq_buscarEnArrayPorId2 (arrayOrquesta, arrayMusico[i].idOrquesta, cantidadOrquesta, &auxPosOrquesta);
                     printf("Orquesta: %s\n", arrayOrquesta[auxPosOrquesta].nombre);
+                    retorno = 0;
                 }
             }
         }
-        retorno = 0;
+        if(auxFlag)
+        {
+            printf("\nNo hay ningun musico menor a 25\n");
+            retorno = -2;
+        }
+
     }
     return retorno;
 }
-
+/** \brief  Lista de cantidades de musico por orquesta
+* \param arrayContadorMusico Array de Musico
+* \param cantidadContadorMusico tamaño de array de contadorMusico
+* \param cantidadOrquesta tamaño de array de Orquesta
+* \return void
+*
+*/
 void inf_mostrarArrayContadorMusico(ContadorMusicos *arrayContadorMusico, int cantidad)
 {
     int i;
@@ -461,19 +503,31 @@ void inf_mostrarArrayContadorMusico(ContadorMusicos *arrayContadorMusico, int ca
         }
     }
 }
-
+/** \brief  Lista las orquestas con menos de 6 musicos
+* \param arrayContadorMusico Array de contadorMusico
+* \param arrayOrquesta array de Orquesta
+* \param cantidadMusico tamaño de array de Musico
+* \param cantidadOrquesta tamaño de array de Orquesta
+* \return   int Return (-1) si Error [largo no valido o NULL pointer] -
+            (0) si lista al menos una orquesta correctamente - (-2) si
+            no encuentra ninguna
+*
+*/
 int menosDe6musicos(ContadorMusicos *arrayContadorMusicos,Orquesta *arrayOrquesta, int cantidadOrquesta)
 {
     int retorno = -1;
     int i;
     int posicionOrquesta;
+    int auxFlag;
 
     if(arrayContadorMusicos != NULL && arrayOrquesta != NULL && cantidadOrquesta > 0)
     {
+        auxFlag = 1;
         for(i=0;i<cantidadOrquesta;i++)
         {
             if(arrayContadorMusicos[i].cantMusico < 6 && arrayContadorMusicos[i].isEmpty == 0)
             {
+                auxFlag = 0;
                 orq_buscarEnArrayPorId2 (arrayOrquesta, arrayContadorMusicos[i].idOrquesta, cantidadOrquesta, &posicionOrquesta);
                 printf("ID de Orquesta: %d\n", arrayOrquesta[posicionOrquesta].idOrquesta);
                 printf("Nombre: %s\n", arrayOrquesta[posicionOrquesta].nombre);
@@ -493,10 +547,25 @@ int menosDe6musicos(ContadorMusicos *arrayContadorMusicos,Orquesta *arrayOrquest
                 retorno = 0;
             }
         }
+        if(auxFlag)
+        {
+            printf("\nNo se encontraron orquestas con menos de 6 musicos\n");
+            retorno = -2;
+        }
     }
     return retorno;
 }
-
+/** \brief  Lista los instrumentos de una orquesta que ingresa el usuario
+* \param arrayMusico Array de Musico
+* \param arrayOrquesta array de Orquesta
+* \param arrayInstrumentoi array de Instrumento
+* \param cantidadMusico tamaño de array de Musico
+* \param cantidadInstrumento tamaño de array de Instrumento
+* \param cantidadOrquesta tamaño de array de Orquesta
+* \return   int Return (-1) si Error [largo no valido o NULL pointer] -
+            (0) si lista correctamente
+*
+*/
 int listaTodosInstrumentosDeUnaOrquesta(Musico *arrayMusico, Orquesta *arrayOrquesta, Instrumento *arrayInstrumento, int cantidadMusico,int cantidadInstrumento, int cantidadOrquesta)
 {
     int retorno = -1;
@@ -517,7 +586,7 @@ int listaTodosInstrumentosDeUnaOrquesta(Musico *arrayMusico, Orquesta *arrayOrqu
             if(arrayMusico[i].idOrquesta == idOrquesta && arrayMusico[i].isEmpty == 0)
             {
                 ins_buscarEnArrayPorId(arrayInstrumento, arrayMusico[i].idInstrumento, cantidadInstrumento, &auxPosInstrumento);
-                printf("Nombre: %s\n", arrayInstrumento[auxPosInstrumento].nombre);
+                printf("Nombre Instrumento: %s\n", arrayInstrumento[auxPosInstrumento].nombre);
                 switch(arrayInstrumento[auxPosInstrumento].tipo)
                 {
                     case 1:
@@ -533,15 +602,22 @@ int listaTodosInstrumentosDeUnaOrquesta(Musico *arrayMusico, Orquesta *arrayOrqu
                         printf("Tipo: 4-Percusion\n");
                         break;
                 }
-                printf("Nombre: %s\n", arrayMusico[i].nombre);
+                printf("Nombre Musico: %s\n\n", arrayMusico[i].nombre);
             }
         }
         retorno = 0;
     }
     return retorno;
 }
-
-
+/** \brief  Muestra la orquesta con menos musicos
+* \param arraycontadorMusico Array de contadorMusico
+* \param arrayOrquesta array de Orquesta
+* \param cantidadMusico tamaño de array de Musico
+* \param cantidadOrquesta tamaño de array de Orquesta
+* \return   int Return (-1) si Error [largo no valido o NULL pointer] -
+            (0) si sale todo correctamente
+*
+*/
 int menosMusicos(ContadorMusicos *arrayContadorMusicos,Orquesta *arrayOrquesta, int cantidadOrquesta)
 {
     int retorno = -1;
@@ -613,7 +689,15 @@ int menosMusicos(ContadorMusicos *arrayContadorMusicos,Orquesta *arrayOrquesta, 
         if(arrayMusico[i].)
      }
 }*/
-
+/** \brief  Imprime en pantalla el promedio de musicos por orquesta
+* \param arrayContador Array de ContadorMusicos
+* \param arrayMusico Array de Musico
+* \param cantidadContador tamaño de array de ContadorMusicos
+* \param cantidadMusico tamaño de array de Musico
+* \return   int Return (-1) si Error [largo no valido o NULL pointer] -
+            (0) si sale todo OK!
+*
+*/
 int promedioInstrumentoPorOrquesta(ContadorMusicos *arrayContador, Musico *arrayMusico, int cantidadContador, int cantidadMusico)
 {
     int retorno = -1;
@@ -629,7 +713,6 @@ int promedioInstrumentoPorOrquesta(ContadorMusicos *arrayContador, Musico *array
             if(arrayContador[i].isEmpty == 0)
             {
                 contadorOrquestas++;
-                retorno = 0;
             }
         }
         for(i=0;i<cantidadMusico;i++)
@@ -637,17 +720,27 @@ int promedioInstrumentoPorOrquesta(ContadorMusicos *arrayContador, Musico *array
             if(arrayMusico[i].isEmpty == 0)
             {
                 contadorInstrumentos++;
-                retorno = 0;
             }
         }
 
         promedio = contadorInstrumentos/(float)contadorOrquestas;
         printf("El promedio de instrumentos por orquesta es: %.2f\n\n", promedio);
+        retorno = 0;
     }
 
     return retorno;
 }
-
+/** \brief  Lista las orquestas que se dicen completas
+* \param arrayOrquesta array de Orquesta
+* \param arrayMusico Array de Musico
+* \param arrayInstrumentoi array de Instrumento
+* \param cantidadOrquesta tamaño de array de Orquesta
+* \param cantidadMusico tamaño de array de Musico
+* \param cantidadInstrumento tamaño de array de Instrumento
+* \return   int Return (-1) si Error [largo no valido o NULL pointer] -
+            (0) si lista al menos un musico correctamente
+*
+*/
 int orquestaCompleta(   Orquesta *arrayOrquesta,
                         Musico *arrayMusico,
                         Instrumento *arrayInstrumento,
@@ -658,11 +751,11 @@ int orquestaCompleta(   Orquesta *arrayOrquesta,
     int retorno = -1;
     int i;
     int j;
-    //int auxPosMusico;
     int auxPosInstrumento;
     int contadorViento;
     int contadorPercusion;
     int contadorCuerda;
+    int auxFlag;
 
     if( arrayMusico != NULL &&
         arrayOrquesta != NULL  &&
@@ -671,6 +764,7 @@ int orquestaCompleta(   Orquesta *arrayOrquesta,
         cantidadOrquesta > 0 &&
         cantidadInstrumento > 0)
     {
+        auxFlag = 1;
         for(i = 0; i < cantidadOrquesta; i++)
         {
             contadorViento = 0;
@@ -678,7 +772,6 @@ int orquestaCompleta(   Orquesta *arrayOrquesta,
             contadorCuerda = 0;
             if(arrayOrquesta[i].isEmpty == 0)
             {
-               // mus_buscarEnArrayPorIdOrquesta(arrayMusico, cantidadOrquesta, arrayOrquesta[i].idOrquesta, &auxPosMusico);
                 for(j = 0; j < cantidadMusico; j++)
                 {
                      if(arrayMusico[j].isEmpty == 0 && arrayMusico[j].idOrquesta == arrayOrquesta[i].idOrquesta)
@@ -699,19 +792,23 @@ int orquestaCompleta(   Orquesta *arrayOrquesta,
                                 contadorPercusion++;
                                 break;
                        }
-                       printf("idOrquesta: %d\n", arrayOrquesta[i].idOrquesta);
-                       printf("contadorCuerda: %d\n", contadorCuerda);
-                       printf("contadorViento: %d\n", contadorViento);
-                       printf("contadorpercu: %d\n", contadorPercusion);
                      }
                 }
             }
             if(arrayOrquesta[i].isEmpty == 0 && contadorCuerda >= 4 && contadorViento >= 4 && contadorPercusion >=1)
             {
+                auxFlag = 0;
+                printf("\n\n\t\tOrquestas Completas\n\n");
                 printf("ID de Orquesta: %d\n", arrayOrquesta[i].idOrquesta);
                 printf("Nombre: %s\n", arrayOrquesta[i].nombre);
                 printf("Lugar: %s\n\n", arrayOrquesta[i].lugar);
+                retorno = 0;
             }
+        }
+        if(auxFlag)
+        {
+            printf("\nNo se encontraron orquestas completas\n");
+            retorno = -2;
         }
     }
     return retorno;
