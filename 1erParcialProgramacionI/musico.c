@@ -1,7 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdio_ext.h>
+//#include <stdio_ext.h>
 #include <ctype.h>
 #include "instrumento.h"
 #include "orquesta.h"
@@ -118,9 +118,9 @@ void mus_mostrarArray(Musico *arrayMusico, Instrumento *arrayInstrumento, int ca
 {
     int i;
     int posicionInstrumento;
-
+    inf_musico_ordenarPorApellido( arrayMusico,
+                                   cantidadMusico);
     printf("\n\n\t\t\t\t||Lista de Musicos||\n\n");
-
     for (i = 0; i < cantidadMusico ;i++)
     {
         if(arrayMusico[i].isEmpty == 0)

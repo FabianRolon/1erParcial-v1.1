@@ -1,7 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdio_ext.h>
+//#include <stdio_ext.h>
 #include <ctype.h>
 #include "instrumento.h"
 #include "orquesta.h"
@@ -95,7 +95,7 @@ void inf_hardcodeo( Orquesta *orquesta,
     musico[1].idMusico=2;
     musico[1].isEmpty=0;
     strcpy(musico[1].nombre,"Mus2");
-    strcpy(musico[1].apellido,"AMus");
+    strcpy(musico[1].apellido,"AMus2");
     musico[1].edad = 20;
     musico[1].idOrquesta = 2;
     musico[1].idInstrumento = 4;
@@ -131,7 +131,7 @@ void inf_hardcodeo( Orquesta *orquesta,
     musico[5].edad = 35;
     musico[5].idOrquesta = 3;
     musico[5].idInstrumento = 4;
-/*
+
     musico[6].idMusico=7;
     musico[6].isEmpty=0;
     strcpy(musico[6].nombre,"Mus7");
@@ -158,112 +158,112 @@ void inf_hardcodeo( Orquesta *orquesta,
 
     musico[9].idMusico=10;
     musico[9].isEmpty=0;
-    strcpy(musico[9].nombre,"Mus9");
-    strcpy(musico[9].apellido,"AMus9");
+    strcpy(musico[9].nombre,"Mus10");
+    strcpy(musico[9].apellido,"AMus10");
     musico[9].edad = 27;
     musico[9].idOrquesta = 4;
     musico[9].idInstrumento = 1;
 
     musico[10].idMusico=11;
     musico[10].isEmpty=0;
-    strcpy(musico[10].nombre,"Mus10");
-    strcpy(musico[10].apellido,"AMus10");
+    strcpy(musico[10].nombre,"Mus11");
+    strcpy(musico[10].apellido,"AMus11");
     musico[10].edad = 27;
     musico[10].idOrquesta = 4;
     musico[10].idInstrumento = 1;
 
     musico[11].idMusico=12;
     musico[11].isEmpty=0;
-    strcpy(musico[11].nombre,"Mus11");
-    strcpy(musico[11].apellido,"AMus11");
+    strcpy(musico[11].nombre,"Mus12");
+    strcpy(musico[11].apellido,"AMus12");
     musico[11].edad = 27;
     musico[11].idOrquesta = 4;
     musico[11].idInstrumento = 3;
 
     musico[12].idMusico=13;
     musico[12].isEmpty=0;
-    strcpy(musico[12].nombre,"Mus12");
-    strcpy(musico[12].apellido,"AMus12");
+    strcpy(musico[12].nombre,"Mus13");
+    strcpy(musico[12].apellido,"AMus13");
     musico[12].edad = 27;
     musico[12].idOrquesta = 4;
     musico[12].idInstrumento = 3;
 
     musico[13].idMusico=14;
     musico[13].isEmpty=0;
-    strcpy(musico[13].nombre,"Mus13");
-    strcpy(musico[13].apellido,"AMus13");
+    strcpy(musico[13].nombre,"Mus14");
+    strcpy(musico[13].apellido,"AMus14");
     musico[13].edad = 25;
     musico[13].idOrquesta = 4;
     musico[13].idInstrumento = 5;
 
     musico[14].idMusico=15;
     musico[14].isEmpty=0;
-    strcpy(musico[14].nombre,"Mus14");
-    strcpy(musico[14].apellido,"AMus14");
+    strcpy(musico[14].nombre,"Mus15");
+    strcpy(musico[14].apellido,"AMus15");
     musico[14].edad = 25;
     musico[14].idOrquesta = 1;
-    musico[14].idInstrumento = 5;*/
+    musico[14].idInstrumento = 5;
 
     musico[15].idMusico=16;
     musico[15].isEmpty=0;
-    strcpy(musico[15].nombre,"Mus15");
-    strcpy(musico[15].apellido,"AMus15");
+    strcpy(musico[15].nombre,"Mus16");
+    strcpy(musico[15].apellido,"AMus16");
     musico[15].edad = 43;
     musico[15].idOrquesta = 1;
     musico[15].idInstrumento = 2;
 
     musico[16].idMusico=17;
     musico[16].isEmpty=0;
-    strcpy(musico[16].nombre,"Mus16");
-    strcpy(musico[16].apellido,"AMus16");
+    strcpy(musico[16].nombre,"Mus17");
+    strcpy(musico[16].apellido,"AMus17");
     musico[16].edad = 21;
     musico[16].idOrquesta = 1;
     musico[16].idInstrumento = 1;
 
     musico[17].idMusico=18;
     musico[17].isEmpty=0;
-    strcpy(musico[17].nombre,"Mus17");
-    strcpy(musico[17].apellido,"AMus17");
+    strcpy(musico[17].nombre,"Mus18");
+    strcpy(musico[17].apellido,"AMus18");
     musico[17].edad = 28;
     musico[17].idOrquesta = 1;
     musico[17].idInstrumento = 1;
 
     musico[18].idMusico=19;
     musico[18].isEmpty=0;
-    strcpy(musico[18].nombre,"Mus18");
-    strcpy(musico[18].apellido,"AMus18");
+    strcpy(musico[18].nombre,"Mus19");
+    strcpy(musico[18].apellido,"AMus19");
     musico[18].edad = 55;
     musico[18].idOrquesta = 1;
     musico[18].idInstrumento = 1;
 
     musico[19].idMusico=20;
     musico[19].isEmpty=0;
-    strcpy(musico[19].nombre,"Mus19");
-    strcpy(musico[19].apellido,"AMus19");
+    strcpy(musico[19].nombre,"Mus20");
+    strcpy(musico[19].apellido,"AMus20");
     musico[19].edad = 33;
     musico[19].idOrquesta = 1;
     musico[19].idInstrumento = 1;
 
     musico[20].idMusico=21;
     musico[20].isEmpty=0;
-    strcpy(musico[20].nombre,"Mus20");
-    strcpy(musico[20].apellido,"AMus20");
+    strcpy(musico[20].nombre,"Mus21");
+    strcpy(musico[20].apellido,"AMus21");
     musico[20].edad = 32;
     musico[20].idOrquesta = 1;
     musico[20].idInstrumento = 3;
 
     musico[21].idMusico=22;
     musico[21].isEmpty=0;
-    strcpy(musico[21].nombre,"Mus21");
-    strcpy(musico[21].apellido,"AMus21");
+    strcpy(musico[21].nombre,"Mus22");
+    strcpy(musico[21].apellido,"AMus22");
     musico[21].edad = 37;
     musico[21].idOrquesta = 1;
     musico[21].idInstrumento = 2;
 
     musico[22].idMusico=23;
     musico[22].isEmpty=0;
-    strcpy(musico[22].nombre,"Mus22");
-    strcpy(musico[22].apellido,"AMus22");
+    strcpy(musico[22].nombre,"Mus23");
+    strcpy(musico[22].apellido,"AMus23");
     musico[22].edad = 20;
     musico[22].idOrquesta = 1;
     musico[22].idInstrumento = 2;
@@ -277,31 +277,32 @@ void inf_hardcodeo( Orquesta *orquesta,
 * \return int Return (-1) si Error [largo no valido o NULL pointer] - (0) si se ordena exitosamente
 *
 */
-int inf_musico_ordenarPorApellido( Musico arrayMusico[],
-                                        int size,
-                                        int order)
+int inf_musico_ordenarPorApellido( Musico *arrayMusico,
+                                        int size)
 {
     int retorno=-1;
     int i;
     Musico buffer;
     int flagSwap;
 
-    if(arrayMusico!=NULL && size>=0)
+    if(arrayMusico!=NULL && size>=0 )
     {
         do
         {
             flagSwap=0;
-            for (i = 1; i < size-1; i++)
+            for (i = 0; i < size-1; i++)
             {
-                if( ((strcmp(arrayMusico[i].nombre,arrayMusico[i+1].nombre) < 0) && order) ||
-                    ((strcmp(arrayMusico[i].nombre,arrayMusico[i+1].nombre) > 0) && !order) )
+                if(arrayMusico[i+1].isEmpty == 0 && arrayMusico[i].isEmpty == 0)
                 {
-                    flagSwap=1;
-                    buffer = arrayMusico[i];
-                    arrayMusico[i] = arrayMusico[i+1];
-                    arrayMusico[i+1] = buffer;
+                     if( strcmp(arrayMusico[i].nombre,arrayMusico[i+1].nombre) < 0 /* && order) ||
+                        ((strcmp(arrayMusico[i].nombre,arrayMusico[i+1].nombre) > 0) && !order)*/ )
+                    {
+                        flagSwap=1;
+                        buffer = arrayMusico[i];
+                        arrayMusico[i] = arrayMusico[i+1];
+                        arrayMusico[i+1] = buffer;
+                    }
                 }
-
             }
         }while(flagSwap);
         retorno=0;
@@ -794,7 +795,8 @@ int inf_musicosNoInstrumentoViento( Musico arrayMusico[],
     int i;
     int posicionInstrumento;
 
-    inf_ordenarPorApellido(arrayMusico, 0, cantidadMusico-1);
+    inf_musico_ordenarPorApellido( arrayMusico,
+                                   cantidadMusico);
 
     if( arrayMusico != NULL &&
         arrayInstrumento != NULL &&
@@ -997,5 +999,4 @@ void inf_ordenarPorApellido(Musico arrayMusico[], int inicio, int final)
       if(i < final){
         inf_ordenarPorApellido(arrayMusico,i,final);
       }
-
     }

@@ -11,8 +11,7 @@ typedef struct
 
 void inf_hardcodeo(Orquesta *orquesta, Instrumento *instrumento, Musico *musico, int *generadorCodigoOrquesta, int *generadorCodigoInstrumento,  int *generadorCodigoMusico);
 int inf_musico_ordenarPorApellido( Musico arrayMusico[],
-                                        int size,
-                                        int order);
+                                        int size);
 int inf_contadorMusicosOrquesta(ContadorMusicos *arrayContadorMusicos, Orquesta *arrayOrquesta, Musico *arrayMusico, int cantidadMusico, int cantidadOrquesta);
 int inf_orquestasDeUnLugar(Orquesta *arrayOrquesta, int cantidadOrquesta);
 int inf_menosDe25(Musico *arrayMusico, Orquesta *arrayOrquesta, Instrumento *arrayInstrumento, int cantidadMusico,int cantidadOrquesta,int cantidadInstrumento);
