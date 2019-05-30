@@ -7,6 +7,8 @@
 #include "orquesta.h"
 #include "musico.h"
 #include "utn.h"
+#include "informes.h"
+
 
 int mus_Inicializar(Musico *arrayMusico, int cantidad)
 {
@@ -94,7 +96,7 @@ int mus_baja(Musico *arrayMusico, Instrumento *arrayInstrumento, int cantidadMus
     int retorno = -1;
     int posicionMusico;
     mus_mostrarArray(arrayMusico, arrayInstrumento, cantidadMusico, cantidadInstrumento);
-    switch (mus_buscarEnArrayPorId(arrayMusico, cantidadMusico,&posicionMusico,"Ingrese el codigo del musico a dar de baja: "))
+    switch (mus_buscarEnArrayPorId(arrayMusico, cantidadMusico,&posicionMusico,"Ingrese el ID del musico a dar de baja: "))
     {
     case 0:
         if (arrayMusico[posicionMusico].isEmpty == 0)
@@ -106,7 +108,7 @@ int mus_baja(Musico *arrayMusico, Instrumento *arrayInstrumento, int cantidadMus
         }
         break;
     case 1:
-        printf("No se encontro el codigo\n\n");
+        printf("No se encontro el ID\n\n");
         break;
     }
     return retorno;
@@ -184,7 +186,7 @@ int mus_modificacion(Musico *arrayMusico, Instrumento *arrayInstrumento, Orquest
                 switch(opcion)
                 {
                     case 1:
-                        if (getString("Ingrese el nuevo nombre de musico: ","Error",2,20,2, arrayMusico[posicionMusico].nombre)==0)
+                        if (utn_getName("Ingrese el nuevo nombre de musico: ","Error",2,20,2, arrayMusico[posicionMusico].nombre)==0)
                         {
                             printf("El dato fue modificado con exito.\n\n");
                         }

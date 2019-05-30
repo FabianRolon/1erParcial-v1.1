@@ -339,9 +339,9 @@
 
 1559000986 /home/fabianrolon/Documentos/1erParcial-v1.1/1erParcialProgramacionI/instrumento.h
 
-1559000986 /home/fabianrolon/Documentos/1erParcial-v1.1/1erParcialProgramacionI/utn.h
+1559173883 /home/fabianrolon/Documentos/1erParcial-v1.1/1erParcialProgramacionI/utn.h
 
-1559007977 source:/home/fabianrolon/Documentos/1erParcial-v1.1/1erParcialProgramacionI/main.c
+1559182556 source:/home/fabianrolon/Documentos/1erParcial-v1.1/1erParcialProgramacionI/main.c
 	<string.h>
 	<stdio.h>
 	<stdlib.h>
@@ -358,9 +358,9 @@
 	"instrumento.h"
 	"orquesta.h"
 
-1559000986 /home/fabianrolon/Documentos/1erParcial-v1.1/1erParcialProgramacionI/informes.h
+1559185651 /home/fabianrolon/Documentos/1erParcial-v1.1/1erParcialProgramacionI/informes.h
 
-1559000986 source:/home/fabianrolon/Documentos/1erParcial-v1.1/1erParcialProgramacionI/musico.c
+1559184499 source:/home/fabianrolon/Documentos/1erParcial-v1.1/1erParcialProgramacionI/musico.c
 	<string.h>
 	<stdio.h>
 	<stdlib.h>
@@ -370,8 +370,9 @@
 	"orquesta.h"
 	"musico.h"
 	"utn.h"
+	"informes.h"
 
-1559000986 source:/home/fabianrolon/Documentos/1erParcial-v1.1/1erParcialProgramacionI/orquesta.c
+1559175514 source:/home/fabianrolon/Documentos/1erParcial-v1.1/1erParcialProgramacionI/orquesta.c
 	<string.h>
 	<stdio.h>
 	<stdlib.h>
@@ -380,14 +381,14 @@
 	"musico.h"
 	"utn.h"
 
-1559000986 source:/home/fabianrolon/Documentos/1erParcial-v1.1/1erParcialProgramacionI/utn.c
+1559176081 source:/home/fabianrolon/Documentos/1erParcial-v1.1/1erParcialProgramacionI/utn.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<stdio_ext.h>
 	"utn.h"
 
-1559007984 source:/home/fabianrolon/Documentos/1erParcial-v1.1/1erParcialProgramacionI/informes.c
+1559185858 source:/home/fabianrolon/Documentos/1erParcial-v1.1/1erParcialProgramacionI/informes.c
 	<string.h>
 	<stdio.h>
 	<stdlib.h>

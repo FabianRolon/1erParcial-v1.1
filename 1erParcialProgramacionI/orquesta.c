@@ -140,13 +140,13 @@ int orq_modificacion(Orquesta *arrayOrquesta, int cantidad)
                 switch(opcion)
                 {
                     case 1:
-                        if (getString("Ingrese el nuevo nombre de orquesta: ","Error",2,20,2, arrayOrquesta[posicionOrquesta].nombre)==0)
+                        if (utn_getName("Ingrese el nuevo nombre de orquesta: ","Error",2,20,2, arrayOrquesta[posicionOrquesta].nombre)==0)
                         {
                             printf("El dato fue modificado con exito.\n\n");
                         }
                         break;
                     case 2:
-                        if (getString("Ingrese el nuevo lugar: " ,"Error, vuelva a ingresar\n\n",2,30,2, arrayOrquesta[posicionOrquesta].lugar)==0)
+                        if (utn_getName("Ingrese el nuevo lugar: " ,"Error, vuelva a ingresar\n\n",2,30,2, arrayOrquesta[posicionOrquesta].lugar)==0)
                         {
                             printf("El dato fue modificado con exito.\n\n");
                         }

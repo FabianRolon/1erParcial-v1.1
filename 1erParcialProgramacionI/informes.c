@@ -12,7 +12,25 @@
 #define CANTIDAD_INSTRUMENTO 20
 #define CANTIDAD_MUSICO 1000
 
-void harcodeo(Orquesta *orquesta, Instrumento *instrumento, Musico *musico, int *generadorCodigoOrquesta, int *generadorCodigoInstrumento,  int *generadorCodigoMusico)
+/** \brief carga datos en las entidades Musico, Orquesta e Instrumento
+* \param arrayOrquesta array de Orquesta
+* \param arrayInstrumentoi array de Instrumento
+* \param arrayMusico Array de Musico
+* \param    generadorCodigoOrquesta puntero a una variable que guarda el
+            proximo id
+* \param    generadorCodigoInstrumento puntero a una variable que guarda el
+            proximo id
+* \param    generadorCodigoMusico puntero a una variable que guarda el
+            proximo id
+* \return void
+*
+*/
+void inf_hardcodeo( Orquesta *orquesta,
+                    Instrumento *instrumento,
+                    Musico *musico,
+                    int *generadorCodigoOrquesta,
+                    int *generadorCodigoInstrumento,
+                    int *generadorCodigoMusico)
 {
     orquesta[0].idOrquesta=1;
     orquesta[0].isEmpty=0;
@@ -113,7 +131,7 @@ void harcodeo(Orquesta *orquesta, Instrumento *instrumento, Musico *musico, int 
     musico[5].edad = 35;
     musico[5].idOrquesta = 3;
     musico[5].idInstrumento = 4;
-
+/*
     musico[6].idMusico=7;
     musico[6].isEmpty=0;
     strcpy(musico[6].nombre,"Mus7");
@@ -177,20 +195,91 @@ void harcodeo(Orquesta *orquesta, Instrumento *instrumento, Musico *musico, int 
     musico[13].edad = 25;
     musico[13].idOrquesta = 4;
     musico[13].idInstrumento = 5;
-    *generadorCodigoMusico = 14;
+
+    musico[14].idMusico=15;
+    musico[14].isEmpty=0;
+    strcpy(musico[14].nombre,"Mus14");
+    strcpy(musico[14].apellido,"AMus14");
+    musico[14].edad = 25;
+    musico[14].idOrquesta = 1;
+    musico[14].idInstrumento = 5;*/
+
+    musico[15].idMusico=16;
+    musico[15].isEmpty=0;
+    strcpy(musico[15].nombre,"Mus15");
+    strcpy(musico[15].apellido,"AMus15");
+    musico[15].edad = 43;
+    musico[15].idOrquesta = 1;
+    musico[15].idInstrumento = 2;
+
+    musico[16].idMusico=17;
+    musico[16].isEmpty=0;
+    strcpy(musico[16].nombre,"Mus16");
+    strcpy(musico[16].apellido,"AMus16");
+    musico[16].edad = 21;
+    musico[16].idOrquesta = 1;
+    musico[16].idInstrumento = 1;
+
+    musico[17].idMusico=18;
+    musico[17].isEmpty=0;
+    strcpy(musico[17].nombre,"Mus17");
+    strcpy(musico[17].apellido,"AMus17");
+    musico[17].edad = 28;
+    musico[17].idOrquesta = 1;
+    musico[17].idInstrumento = 1;
+
+    musico[18].idMusico=19;
+    musico[18].isEmpty=0;
+    strcpy(musico[18].nombre,"Mus18");
+    strcpy(musico[18].apellido,"AMus18");
+    musico[18].edad = 55;
+    musico[18].idOrquesta = 1;
+    musico[18].idInstrumento = 1;
+
+    musico[19].idMusico=20;
+    musico[19].isEmpty=0;
+    strcpy(musico[19].nombre,"Mus19");
+    strcpy(musico[19].apellido,"AMus19");
+    musico[19].edad = 33;
+    musico[19].idOrquesta = 1;
+    musico[19].idInstrumento = 1;
+
+    musico[20].idMusico=21;
+    musico[20].isEmpty=0;
+    strcpy(musico[20].nombre,"Mus20");
+    strcpy(musico[20].apellido,"AMus20");
+    musico[20].edad = 32;
+    musico[20].idOrquesta = 1;
+    musico[20].idInstrumento = 3;
+
+    musico[21].idMusico=22;
+    musico[21].isEmpty=0;
+    strcpy(musico[21].nombre,"Mus21");
+    strcpy(musico[21].apellido,"AMus21");
+    musico[21].edad = 37;
+    musico[21].idOrquesta = 1;
+    musico[21].idInstrumento = 2;
+
+    musico[22].idMusico=23;
+    musico[22].isEmpty=0;
+    strcpy(musico[22].nombre,"Mus22");
+    strcpy(musico[22].apellido,"AMus22");
+    musico[22].edad = 20;
+    musico[22].idOrquesta = 1;
+    musico[22].idInstrumento = 2;
+    *generadorCodigoMusico = 24;
 }
 
-
-
-/** \brief Ordena por campo XXXXX los elementos de un array ante la igualdad de estos ordena por el campo ZZZZZZ
+/** \brief  Ordena por campo apellido los elementos de musico
 * \param array musico Array de musico
 * \param size int Tamaño del array
-* \param orderFirst int Determina si el orden del primer criterio es ascendete o descendente
-* \param orderSecond int Determina si el orden del segunbdo criterio es ascendete o descendente
+* \param order int Determina si el orden del criterio es ascendete o descendente
 * \return int Return (-1) si Error [largo no valido o NULL pointer] - (0) si se ordena exitosamente
 *
 */
-int musico_ordenarPorDobleCriterio(Musico *arrayMusico,int size, int orderFirst, int orderSecond)
+int inf_musico_ordenarPorApellido( Musico arrayMusico[],
+                                        int size,
+                                        int order)
 {
     int retorno=-1;
     int i;
@@ -204,25 +293,15 @@ int musico_ordenarPorDobleCriterio(Musico *arrayMusico,int size, int orderFirst,
             flagSwap=0;
             for (i = 1; i < size-1; i++)
             {
-                if( ((strcmp(arrayMusico[i].nombre,arrayMusico[i+1].nombre) < 0) && orderFirst) ||
-                    ((strcmp(arrayMusico[i].nombre,arrayMusico[i+1].nombre) > 0) && !orderFirst) )
+                if( ((strcmp(arrayMusico[i].nombre,arrayMusico[i+1].nombre) < 0) && order) ||
+                    ((strcmp(arrayMusico[i].nombre,arrayMusico[i+1].nombre) > 0) && !order) )
                 {
                     flagSwap=1;
                     buffer = arrayMusico[i];
                     arrayMusico[i] = arrayMusico[i+1];
                     arrayMusico[i+1] = buffer;
                 }
-                else if(strcmp(arrayMusico[i].nombre,arrayMusico[i+1].nombre) == 0)
-                {
-                    if( ((arrayMusico[i].apellido < arrayMusico[i+1].apellido) && orderSecond) ||
-                        ((arrayMusico[i].apellido > arrayMusico[i+1].apellido) && !orderSecond) )
-                    {
-                        flagSwap=1;
-                        buffer = arrayMusico[i];
-                        arrayMusico[i] = arrayMusico[i+1];
-                        arrayMusico[i+1] = buffer;
-                    }
-                }
+
             }
         }while(flagSwap);
         retorno=0;
@@ -236,7 +315,8 @@ int musico_ordenarPorDobleCriterio(Musico *arrayMusico,int size, int orderFirst,
 * \return int Return (-1) si Error [largo no valido o NULL pointer] - (0) si se inicializa correctamente
 *
 */
-int inf_InicializarCantidadMusico(ContadorMusicos *arrayContadorMusicos, int cantidad)
+int inf_InicializarCantidadMusico(  ContadorMusicos *arrayContadorMusicos,
+                                    int cantidad)
 {
     int retorno = -1;
     int i;
@@ -280,7 +360,10 @@ int inf_Inicializar(ContadorMusicos *arrayContadorMusico, int cantidad)
 * \return int Return (-1) si Error [largo no valido o NULL pointer] - (0) si se encuentra una posicion correctamente
 *
 */
-int inf_posicionArrayContador(ContadorMusicos *arrayContadorMusicos, int *posicionResultante, int cantidadOrquesta, int idOrquesta)
+int inf_posicionArrayContador(  ContadorMusicos *arrayContadorMusicos,
+                                int *posicionResultante,
+                                int cantidadOrquesta,
+                                int idOrquesta)
 {
     int retorno = -1;
     int i;
@@ -352,6 +435,13 @@ int inf_contadorMusicosOrquesta(ContadorMusicos *arrayContadorMusicos,
                             arrayContadorMusicos[posicionArrayContador].cantMusico++;
                         }
                     }
+                }
+            }
+            if(arrayOrquesta[i].isEmpty == 2)
+            {
+                if(inf_posicionArrayContador(arrayContadorMusicos, &posicionArrayContador, cantidadOrquesta, arrayOrquesta[i].idOrquesta) == 0 )
+                {
+                    arrayContadorMusicos[posicionArrayContador].isEmpty = 2;
                 }
             }
         }
@@ -487,7 +577,8 @@ int inf_menosDe25(  Musico *arrayMusico,
 * \return void
 *
 */
-void inf_mostrarArrayContadorMusico(ContadorMusicos *arrayContadorMusico, int cantidad)
+void inf_mostrarArrayContadorMusico(ContadorMusicos *arrayContadorMusico,
+                                    int cantidad)
 {
     int i;
 
@@ -513,7 +604,9 @@ void inf_mostrarArrayContadorMusico(ContadorMusicos *arrayContadorMusico, int ca
             no encuentra ninguna
 *
 */
-int menosDe6musicos(ContadorMusicos *arrayContadorMusicos,Orquesta *arrayOrquesta, int cantidadOrquesta)
+int inf_menosDe6musicos(ContadorMusicos *arrayContadorMusicos,
+                        Orquesta *arrayOrquesta,
+                        int cantidadOrquesta)
 {
     int retorno = -1;
     int i;
@@ -566,7 +659,12 @@ int menosDe6musicos(ContadorMusicos *arrayContadorMusicos,Orquesta *arrayOrquest
             (0) si lista correctamente
 *
 */
-int listaTodosInstrumentosDeUnaOrquesta(Musico *arrayMusico, Orquesta *arrayOrquesta, Instrumento *arrayInstrumento, int cantidadMusico,int cantidadInstrumento, int cantidadOrquesta)
+int inf_listaTodosInstrumentosDeUnaOrquesta(Musico *arrayMusico,
+                                            Orquesta *arrayOrquesta,
+                                            Instrumento *arrayInstrumento,
+                                            int cantidadMusico,
+                                            int cantidadInstrumento,
+                                            int cantidadOrquesta)
 {
     int retorno = -1;
     int auxPosInstrumento;
@@ -618,10 +716,13 @@ int listaTodosInstrumentosDeUnaOrquesta(Musico *arrayMusico, Orquesta *arrayOrqu
             (0) si sale todo correctamente
 *
 */
-int menosMusicos(ContadorMusicos *arrayContadorMusicos,Orquesta *arrayOrquesta, int cantidadOrquesta)
+int inf_menosMusicos(   ContadorMusicos *arrayContadorMusicos,
+                        Orquesta *arrayOrquesta,
+                        int cantidadOrquesta)
 {
     int retorno = -1;
     int i;
+    int idOrquesta;
     int posicionOrquesta;
     int menosMusicos = 1000;
 
@@ -632,10 +733,11 @@ int menosMusicos(ContadorMusicos *arrayContadorMusicos,Orquesta *arrayOrquesta, 
             if(arrayContadorMusicos[i].cantMusico < menosMusicos && arrayContadorMusicos[i].isEmpty == 0)
             {
                 menosMusicos = arrayContadorMusicos[i].cantMusico;
-                posicionOrquesta = i;
+                idOrquesta = arrayContadorMusicos[i].idOrquesta;;
             }
         }
-        orq_buscarEnArrayPorId2 (arrayOrquesta, arrayOrquesta[posicionOrquesta].idOrquesta, cantidadOrquesta, &posicionOrquesta);
+        orq_buscarEnArrayPorId2 (arrayOrquesta, idOrquesta, cantidadOrquesta, &posicionOrquesta);
+        printf("\n\n\t\tOrquestas con menos musicos\n\n");
         printf("ID de Orquesta: %d\n", arrayOrquesta[posicionOrquesta].idOrquesta);
         printf("Nombre: %s\n", arrayOrquesta[posicionOrquesta].nombre);
         printf("Lugar: %s\n", arrayOrquesta[posicionOrquesta].lugar);
@@ -654,41 +756,90 @@ int menosMusicos(ContadorMusicos *arrayContadorMusicos,Orquesta *arrayOrquesta, 
         }
         for(i=0;i<cantidadOrquesta;i++)
         {
-            if(arrayContadorMusicos[i].cantMusico == menosMusicos && arrayContadorMusicos[i].isEmpty == 0)
+            if( arrayContadorMusicos[i].cantMusico == menosMusicos &&
+                arrayContadorMusicos[i].isEmpty == 0 &&
+                idOrquesta != arrayContadorMusicos[i].idOrquesta)
             {
-                menosMusicos = arrayContadorMusicos[i].cantMusico;
-                posicionOrquesta = i;
+                orq_buscarEnArrayPorId2 (arrayOrquesta, arrayOrquesta[i].idOrquesta, cantidadOrquesta, &posicionOrquesta);
+                printf("ID de Orquesta: %d\n", arrayOrquesta[posicionOrquesta].idOrquesta);
+                printf("Nombre: %s\n", arrayOrquesta[posicionOrquesta].nombre);
+                printf("Lugar: %s\n", arrayOrquesta[posicionOrquesta].lugar);
+                printf("Cantidad de musicos: %d\n", menosMusicos);
+                switch(arrayOrquesta[posicionOrquesta].tipo)
+                {
+                    case 1:
+                        printf("Tipo: 1-Sinfonica\n\n");
+                        break;
+                    case 2:
+                        printf("Tipo: 2-Filarmonica\n\n");
+                        break;
+                    case 3:
+                        printf("Tipo: 3-Camara\n\n");
+                        break;
+                }
             }
         }
-        orq_buscarEnArrayPorId2 (arrayOrquesta, arrayOrquesta[posicionOrquesta].idOrquesta, cantidadOrquesta, &posicionOrquesta);
-        printf("ID de Orquesta: %d\n", arrayOrquesta[posicionOrquesta].idOrquesta);
-        printf("Nombre: %s\n", arrayOrquesta[posicionOrquesta].nombre);
-        printf("Lugar: %s\n", arrayOrquesta[posicionOrquesta].lugar);
-        printf("Cantidad de musicos: %d\n", menosMusicos);
-        switch(arrayOrquesta[posicionOrquesta].tipo)
-        {
-            case 1:
-                printf("Tipo: 1-Sinfonica\n\n");
-                break;
-            case 2:
-                printf("Tipo: 2-Filarmonica\n\n");
-                break;
-            case 3:
-                printf("Tipo: 3-Camara\n\n");
-                break;
-        }
+
         retorno = 0;
     }
     return retorno;
 }
 
-/*int musicosNoInstrumentoViento(Musico *arrayMusico, Instrumento *arrayInstrumento, int cantidadInstrumento, int cantidadMusico)
+int inf_musicosNoInstrumentoViento( Musico arrayMusico[],
+                                    Instrumento *arrayInstrumento,
+                                    int cantidadInstrumento,
+                                    int cantidadMusico)
 {
-     if(arrayMusicos != NULL && arrayOrquesta != NULL && cantidadOrquesta > 0 && cantidadMusico >0)
-     {
-        if(arrayMusico[i].)
-     }
-}*/
+    int retorno = -1;
+    int i;
+    int posicionInstrumento;
+
+    inf_ordenarPorApellido(arrayMusico, 0, cantidadMusico-1);
+
+    if( arrayMusico != NULL &&
+        arrayInstrumento != NULL &&
+        cantidadMusico > 0 &&
+        cantidadInstrumento > 0)
+    {
+    for(i = 0; i < cantidadMusico; i++)
+    {
+        if(arrayMusico[i].isEmpty == 0)
+        {
+            if(ins_buscarEnArrayPorId ( arrayInstrumento,
+                                        arrayMusico[i].idInstrumento,
+                                        cantidadInstrumento,
+                                        &posicionInstrumento) == 0)
+            {
+                if( arrayInstrumento[posicionInstrumento].tipo != 2 &&
+                    arrayInstrumento[posicionInstrumento].tipo != 3)
+                        {
+                            printf("Nombre: %s\n", arrayMusico[i].nombre);
+                            printf("Apellido: %s\n", arrayMusico[i].apellido);
+                            printf("Edad: %d\n", arrayMusico[i].edad);
+                            printf("Nombre de Instrumento: %s\n", arrayInstrumento[posicionInstrumento].nombre);
+                            switch(arrayInstrumento[posicionInstrumento].tipo)
+                            {
+                                case 1:
+                                    printf("Tipo: 1-Cuerdas\n\n");
+                                    break;
+                                case 2:
+                                    printf("Tipo: 2-Viento-madera\n");
+                                    break;
+                                case 3:
+                                    printf("Tipo: 3-Viento-metal\n");
+                                    break;
+                                case 4:
+                                    printf("Tipo: 4-Percusion\n\n");
+                                    break;
+                        }
+                        retorno = 0;
+                    }
+                }
+            }
+        }
+    }
+    return retorno;
+}
 /** \brief  Imprime en pantalla el promedio de musicos por orquesta
 * \param arrayContador Array de ContadorMusicos
 * \param arrayMusico Array de Musico
@@ -698,7 +849,10 @@ int menosMusicos(ContadorMusicos *arrayContadorMusicos,Orquesta *arrayOrquesta, 
             (0) si sale todo OK!
 *
 */
-int promedioInstrumentoPorOrquesta(ContadorMusicos *arrayContador, Musico *arrayMusico, int cantidadContador, int cantidadMusico)
+int inf_promedioInstrumentoPorOrquesta( ContadorMusicos *arrayContador,
+                                        Musico *arrayMusico,
+                                        int cantidadContador,
+                                        int cantidadMusico)
 {
     int retorno = -1;
     int i;
@@ -741,7 +895,7 @@ int promedioInstrumentoPorOrquesta(ContadorMusicos *arrayContador, Musico *array
             (0) si lista al menos un musico correctamente
 *
 */
-int orquestaCompleta(   Orquesta *arrayOrquesta,
+int inf_orquestaCompleta(   Orquesta *arrayOrquesta,
                         Musico *arrayMusico,
                         Instrumento *arrayInstrumento,
                         int cantidadOrquesta,
@@ -765,6 +919,7 @@ int orquestaCompleta(   Orquesta *arrayOrquesta,
         cantidadInstrumento > 0)
     {
         auxFlag = 1;
+        printf("\n\n\t\tOrquestas Completas\n\n");
         for(i = 0; i < cantidadOrquesta; i++)
         {
             contadorViento = 0;
@@ -798,7 +953,6 @@ int orquestaCompleta(   Orquesta *arrayOrquesta,
             if(arrayOrquesta[i].isEmpty == 0 && contadorCuerda >= 4 && contadorViento >= 4 && contadorPercusion >=1)
             {
                 auxFlag = 0;
-                printf("\n\n\t\tOrquestas Completas\n\n");
                 printf("ID de Orquesta: %d\n", arrayOrquesta[i].idOrquesta);
                 printf("Nombre: %s\n", arrayOrquesta[i].nombre);
                 printf("Lugar: %s\n\n", arrayOrquesta[i].lugar);
@@ -813,3 +967,35 @@ int orquestaCompleta(   Orquesta *arrayOrquesta,
     }
     return retorno;
 }
+
+void inf_ordenarPorApellido(Musico arrayMusico[], int inicio, int final)
+    {
+
+      int i = inicio, f = final;
+
+      Musico auxMusico, aux2Musico;
+      strcpy(auxMusico.apellido,arrayMusico[(inicio + final) / 2].apellido );
+      do {
+        while(strcmp(arrayMusico[i].apellido, auxMusico.apellido) < 0 && f <= final) {
+          i++;
+        }
+        while(strcmp(auxMusico.apellido,arrayMusico[f].apellido) < 0 && f > inicio) {
+          f--;
+        }
+        if(i <= f) {
+          aux2Musico = arrayMusico[i];
+          arrayMusico[i] = arrayMusico[f];
+          arrayMusico[f] = aux2Musico;
+          i++; f--;
+        }
+      } while(i <= f);
+
+      if(inicio < f) {
+        inf_ordenarPorApellido(arrayMusico,inicio,f);
+      }
+
+      if(i < final){
+        inf_ordenarPorApellido(arrayMusico,i,final);
+      }
+
+    }
