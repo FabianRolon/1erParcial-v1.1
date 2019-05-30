@@ -20,10 +20,10 @@ typedef struct
 int mus_Inicializar(Musico *arrayMusico, int cantidad);
 int mus_buscarLibre(Musico *arrayMusico, int cantidad, int *devuelve);
 int mus_buscarEnArrayPorId(Musico *arrayMusico, int cantidad, int *musicoEncontrada,char *textoAMostrar);
-int mus_buscarEnArrayPorIdOrquesta(Musico *arrayMusico, int cantidad, int idOrquesta, int *musicoEncontrado);
+int mus_buscarEnArrayPorIdOrquesta(Musico *arrayMusico, int cantidadMusico, int idOrquesta, int *musicoEncontrado);
 int mus_alta(Musico *arrayMusico, Instrumento *arrayInstrumento, Orquesta *arrayOrquesta, int cantidadMusico, int cantidadInstrumento, int cantidadOrquesta, int posLibre, int id);
 int mus_baja(Musico *arrayMusico, Instrumento *arrayInstrumento, int cantidadMusico, int cantidadInstrumento);
-void mus_mostrarArray(Musico *arrayMusico, Instrumento *arrayInstrumento, int cantidadMusico, int cantidadInstrumento);
+void mus_mostrarArray(Musico arrayMusico[], Instrumento arrayInstrumento[], int cantidadMusico, int cantidadInstrumento);
 int mus_modificacion(Musico *arrayMusico, Instrumento *arrayInstrumento, Orquesta *arrayOrquesta, int cantidadMusico, int cantidadInstrumento, int cantidadOrquesta);
 int mus_existeId (Musico *arrayMusico, int cantidad, int id);
 void mus_mostrarArray2(Musico *arrayMusico, int cantidad);

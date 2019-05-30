@@ -1,7 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-//#include <stdio_ext.h>
+#include <stdio_ext.h>
 #include <ctype.h>
 #include "instrumento.h"
 #include "orquesta.h"
@@ -9,7 +9,12 @@
 #include "utn.h"
 #include "informes.h"
 
-
+/** \brief Inicializa el campo isEmpty en 1(vacio)
+* \param arrayMusicos Array de Musico
+* \param cantidad es el tamaño del array
+* \return int Return (-1) si Error [largo no valido o NULL pointer] - (0) si se inicializa correctamente
+*
+*/
 int mus_Inicializar(Musico *arrayMusico, int cantidad)
 {
     int retorno = -1;
@@ -23,62 +28,106 @@ int mus_Inicializar(Musico *arrayMusico, int cantidad)
 
     return retorno;
 }
-
+/** \brief Busca una posicion libre en arrayMusico
+* \param cantidad es el tamaño del array
+* \param devuelve int puntero a una variable que guarda la posicion
+* \return int Return (-1) si Error [largo no valido o NULL pointer] - (0) si se inicializa correctamente
+*
+*/
 int mus_buscarLibre(Musico *arrayMusico, int cantidad, int *devuelve)
 {
     int retorno=-1;
     for (int i=0; i<cantidad;i++)
     {
-        if (arrayMusico[i].isEmpty==1)
+        if(arrayMusico != NULL && devuelve != NULL && cantidad > 0)
         {
-            *devuelve=i;
-            retorno=0;
-            break;
+            if (arrayMusico[i].isEmpty==1)
+            {
+                *devuelve=i;
+                retorno=0;
+                break;
+            }
         }
-
         retorno=1;
     }
 
     return retorno;
 }
-
-int mus_alta(Musico *arrayMusico, Instrumento *arrayInstrumento, Orquesta *arrayOrquesta, int cantidadMusico, int cantidadInstrumento, int cantidadOrquesta, int posLibre, int id)
+/** \brief  Da de alta un musico y guarda sus campos en un array de Musico
+* \param arrayMusico Array de Musico
+* \param arrayInstrumentoi array de Instrumento
+* \param arrayOrquesta array de Orquesta
+* \param cantidadMusico tamaño de array de Musico
+* \param cantidadInstrumento tamaño de array de Instrumento
+* \param cantidadOrquesta tamaño de array de Orquesta
+* \param posLibre int recibe una posicion libre para guardar los datos
+* \param id int recibe un  id para asignar a la alta
+* \return   int Return (-1) si Error [largo no valido o NULL pointer] -
+            (0) si se da de alta un musico correctamente
+*/
+int mus_alta(   Musico *arrayMusico,
+                Instrumento *arrayInstrumento,
+                Orquesta *arrayOrquesta,
+                int cantidadMusico,
+                int cantidadInstrumento,
+                int cantidadOrquesta,
+                int posLibre, int id)
 {
     int retorno = -1;
 
-    if (    utn_getName("\n\nIngrese el nombre : ","Error, vuelva a ingresar\n\n",2,30,2, arrayMusico[posLibre].nombre) == 0 &&
+    if( arrayMusico != NULL &&
+        arrayInstrumento != NULL &&
+        arrayOrquesta != NULL &&
+        cantidadMusico > 0 &&
+        cantidadInstrumento > 0 &&
+        cantidadOrquesta > 0)
+    {
+        if (    utn_getName("\n\nIngrese el nombre : ","Error, vuelva a ingresar\n\n",2,30,2, arrayMusico[posLibre].nombre) == 0 &&
             utn_getName("\n\nIngrese el apellido: ","Error, vuelva a ingresar\n\n",2,30,2, arrayMusico[posLibre].apellido) == 0 &&
             utn_getUnsignedInt("\n\nIngrese la edad: ","Error, vuelva a ingresar\n\n",1,9,2,&arrayMusico[posLibre].edad) == 0)
-        {
-           ins_mostrarArray(arrayInstrumento, cantidadInstrumento);
-            if(utn_getUnsignedInt("\n\nIngrese ID de instrumento: ","Error, vuelva a ingresar\n\n",1,5,2,&arrayMusico[posLibre].idInstrumento) == 0)
             {
-                orq_mostrarArray(arrayOrquesta, cantidadOrquesta);
-                if(utn_getUnsignedInt("\n\nIngrese ID de Orquesta: ","Error, vuelva a ingresar\n\n",1,50,2,&arrayMusico[posLibre].idOrquesta) == 0)
+               ins_mostrarArray(arrayInstrumento, cantidadInstrumento);
+                if(utn_getUnsignedInt("\n\nIngrese ID de instrumento: ","Error, vuelva a ingresar\n\n",1,5,2,&arrayMusico[posLibre].idInstrumento) == 0)
                 {
-                    arrayMusico[posLibre].idMusico = id;
-                    arrayMusico[posLibre].isEmpty  = 0;
-                    retorno=0;
-                }
+                    orq_mostrarArray(arrayOrquesta, cantidadOrquesta);
+                    if(utn_getUnsignedInt("\n\nIngrese ID de Orquesta: ","Error, vuelva a ingresar\n\n",1,50,2,&arrayMusico[posLibre].idOrquesta) == 0)
+                    {
+                        arrayMusico[posLibre].idMusico = id;
+                        arrayMusico[posLibre].isEmpty  = 0;
+                        retorno=0;
+                    }
 
+                }
             }
-        }
-        else
-        {
-            retorno = 1;
-        }
+            else
+            {
+                retorno = 1;
+            }
+    }
+
 
         return retorno;
 }
-
-int mus_buscarEnArrayPorIdOrquesta(Musico *arrayMusico, int cantidad, int idOrquesta, int *musicoEncontrado)
+/** \brief  busca un musico de un array Musico por el idOrquesta
+* \param arrayMusico Array de Musico
+* \param cantidadMusico tamaño de array de Musico
+* \param idOrquesta int recibe un idOrquesta
+* \param    musicoEncontrado int puntero a una variable para guardar la posicion
+            encontrada
+* \return   int Return (-1) si Error [largo no valido o NULL pointer] -
+            (0) si se encuentra un musico correctamente
+*/
+int mus_buscarEnArrayPorIdOrquesta( Musico *arrayMusico,
+                                     int cantidadMusico,
+                                     int idOrquesta,
+                                     int *musicoEncontrado)
 {
     int i;
     int retorno = 1;
 
-    if (arrayMusico != NULL && cantidad > 0 && idOrquesta > 0 && musicoEncontrado != NULL)
+    if (arrayMusico != NULL && cantidadMusico > 0 && idOrquesta > 0 && musicoEncontrado != NULL)
     {
-        for(i=0; i < cantidad; i++)
+        for(i=0; i < cantidadMusico; i++)
         {
             if (arrayMusico[i].isEmpty == 0 && arrayMusico[i].idOrquesta == idOrquesta)
             {
@@ -90,36 +139,60 @@ int mus_buscarEnArrayPorIdOrquesta(Musico *arrayMusico, int cantidad, int idOrqu
     }
     return retorno;
 }
-
-int mus_baja(Musico *arrayMusico, Instrumento *arrayInstrumento, int cantidadMusico, int cantidadInstrumento)
+/** \brief  Da de baja un musico dejandolo inhabilitado
+* \param arrayMusico Array de Musico
+* \param arrayInstrumentoi array de Instrumento
+* \param cantidadMusico tamaño de array de Musico
+* \param cantidadInstrumento tamaño de array de Instrumento
+* \return   int Return (-1) si Error [largo no valido o NULL pointer] -
+            (0) si se da de baja un musico correctamente
+*/
+int mus_baja(   Musico *arrayMusico,
+                Instrumento *arrayInstrumento,
+                int cantidadMusico,
+                int cantidadInstrumento)
 {
     int retorno = -1;
     int posicionMusico;
-    mus_mostrarArray(arrayMusico, arrayInstrumento, cantidadMusico, cantidadInstrumento);
-    switch (mus_buscarEnArrayPorId(arrayMusico, cantidadMusico,&posicionMusico,"Ingrese el ID del musico a dar de baja: "))
+
+    if( arrayMusico != NULL &&
+        arrayInstrumento != NULL &&
+        cantidadMusico > 0 &&
+        cantidadInstrumento > 0)
     {
-    case 0:
-        if (arrayMusico[posicionMusico].isEmpty == 0)
+        mus_mostrarArray(arrayMusico, arrayInstrumento, cantidadMusico, cantidadInstrumento);
+        switch (mus_buscarEnArrayPorId(arrayMusico, cantidadMusico,&posicionMusico,"Ingrese el ID del musico a dar de baja: "))
         {
-            printf("Hubo coincidencia\n\n");
-            arrayMusico[posicionMusico].isEmpty = 2;
-            printf("El musico borrado es: %d\n\n",arrayMusico[posicionMusico].idMusico);
-            retorno = 0;
+        case 0:
+            if (arrayMusico[posicionMusico].isEmpty == 0)
+            {
+                printf("Hubo coincidencia\n\n");
+                arrayMusico[posicionMusico].isEmpty = 2;
+                printf("El musico borrado es: %d\n\n",arrayMusico[posicionMusico].idMusico);
+                retorno = 0;
+            }
+            break;
+        case 1:
+            printf("No se encontro el ID\n\n");
+            break;
         }
-        break;
-    case 1:
-        printf("No se encontro el ID\n\n");
-        break;
     }
     return retorno;
 }
-
-void mus_mostrarArray(Musico *arrayMusico, Instrumento *arrayInstrumento, int cantidadMusico, int cantidadInstrumento)
+/** \brief  Imprime en pantalla una lista de musicos habilitados
+* \param arrayMusico Array de Musico
+* \param arrayInstrumento array de Instrumento
+* \param cantidadMusico tamaño de array de Musico
+* \param cantidadInstrumento tamaño de array de Instrumento
+* \return void
+*/
+void mus_mostrarArray(  Musico arrayMusico[],
+                        Instrumento arrayInstrumento[],
+                        int cantidadMusico,
+                        int cantidadInstrumento)
 {
     int i;
     int posicionInstrumento;
-    inf_musico_ordenarPorApellido( arrayMusico,
-                                   cantidadMusico);
     printf("\n\n\t\t\t\t||Lista de Musicos||\n\n");
     for (i = 0; i < cantidadMusico ;i++)
     {
@@ -153,77 +226,112 @@ void mus_mostrarArray(Musico *arrayMusico, Instrumento *arrayInstrumento, int ca
         }
     }
 }
-
-int mus_modificacion(Musico *arrayMusico, Instrumento *arrayInstrumento, Orquesta *arrayOrquesta, int cantidadMusico, int cantidadInstrumento, int cantidadOrquesta)
+/** \brief  Despliega un menu para modificar un musico buscado por id
+* \param arrayMusico Array de Musico
+* \param arrayInstrumentoi array de Instrumento
+* \param arrayOrquesta array de Orquesta
+* \param cantidadMusico tamaño de array de Musico
+* \param cantidadInstrumento tamaño de array de Instrumento
+* \param cantidadOrquesta tamaño de array de Orquesta
+* \return   int Return (-1) si Error [largo no valido o NULL pointer] -
+            (0) si modifica un musico correctamente - (-2) si
+            no encuentra el id
+*
+*/
+int mus_modificacion(   Musico *arrayMusico,
+                        Instrumento *arrayInstrumento,
+                        Orquesta *arrayOrquesta,
+                        int cantidadMusico,
+                        int cantidadInstrumento,
+                        int cantidadOrquesta)
 {
-
     int retorno = -1;
     int opcion;
     int posicionMusico;
     char seguir = 's';
 
-   mus_mostrarArray2(arrayMusico, cantidadMusico);
-
-    switch (mus_buscarEnArrayPorId(arrayMusico, cantidadMusico,&posicionMusico,"Ingrese el ID de musico a modificar: "))
+    if( arrayMusico != NULL &&
+        arrayInstrumento != NULL &&
+        arrayOrquesta != NULL &&
+        cantidadMusico > 0 &&
+        cantidadInstrumento > 0 &&
+        cantidadOrquesta > 0)
     {
-    case 0:
-        if (arrayMusico[posicionMusico].isEmpty == 0)
-        {
-            printf("Hubo coincidencia\n\n");
+         mus_mostrarArray2(arrayMusico, cantidadMusico);
 
-            while(seguir == 's')
+    switch (    mus_buscarEnArrayPorId(arrayMusico,
+                cantidadMusico,
+                &posicionMusico,
+                "Ingrese el ID de musico a modificar: "))
+    {
+        case 0:
+            if (arrayMusico[posicionMusico].isEmpty == 0)
             {
-                printf("Elija el dato que desea modificar\n\n");
+                printf("Hubo coincidencia\n\n");
 
-                printf("\n\n1-Nombre");
-                printf("\n\n2-Edad");
-                printf("\n\n2-ID Orquesta");
-                printf("\n\n4-Salir de la modificacion");
-
-                utn_getUnsignedInt("\n\t\tIngrese opcion: ", "Ingreso incorrecto\n", 1, 3, 2, &opcion);
-
-
-                switch(opcion)
+                while(seguir == 's')
                 {
-                    case 1:
-                        if (utn_getName("Ingrese el nuevo nombre de musico: ","Error",2,20,2, arrayMusico[posicionMusico].nombre)==0)
-                        {
-                            printf("El dato fue modificado con exito.\n\n");
-                        }
-                        break;
-                    case 2:
-                        if (utn_getUnsignedInt("Ingrese la nueva edad: " ,"Error, vuelva a ingresar\n\n",1,9,2, &arrayMusico[posicionMusico].edad)==0)
-                        {
-                            printf("El dato fue modificado con exito.\n\n");
-                        }
-                        break;
+                    printf("Elija el dato que desea modificar\n\n");
 
-                    case 3:
-                         orq_mostrarArray(arrayOrquesta, cantidadOrquesta);
-                         if (utn_getUnsignedInt("Ingrese el nuevo ID de Orquesta: " ,"Error, vuelva a ingresar\n\n",1,50,2, &arrayMusico[posicionMusico].idOrquesta)==0)
+                    printf("\n\n1-Nombre");
+                    printf("\n\n2-Edad");
+                    printf("\n\n2-ID Orquesta");
+                    printf("\n\n4-Salir de la modificacion");
+
+                    utn_getUnsignedInt( "\n\t\tIngrese opcion: ",
+                                        "Ingreso incorrecto\n", 1, 3, 2, &opcion);
+
+
+                    switch(opcion)
+                    {
+                        case 1:
+                            if (utn_getName("Ingrese el nuevo nombre de musico: ",
+                                "Error",2,20,2, arrayMusico[posicionMusico].nombre)==0)
                             {
                                 printf("El dato fue modificado con exito.\n\n");
                             }
+                            break;
+                        case 2:
+                            if (utn_getUnsignedInt("Ingrese la nueva edad: " ,
+                                "Error, vuelva a ingresar\n\n",1,9,2, &arrayMusico[posicionMusico].edad)==0)
+                            {
+                                printf("El dato fue modificado con exito.\n\n");
+                            }
+                            break;
 
-                        break;
+                        case 3:
+                             orq_mostrarArray(arrayOrquesta, cantidadOrquesta);
+                             if (   utn_getUnsignedInt("Ingrese el nuevo ID de Orquesta: " ,
+                                    "Error, vuelva a ingresar\n\n",1,50,2, &arrayMusico[posicionMusico].idOrquesta)==0)
+                                {
+                                    printf("El dato fue modificado con exito.\n\n");
+                                }
 
-                    case 4:
-                        seguir = 'n';
-                        retorno = 0;
-                        break;
+                            break;
+
+                        case 4:
+                            seguir = 'n';
+                            retorno = 0;
+                            break;
+                    }
                 }
             }
-        }
-        break;
+            break;
 
-    case 1:
-        printf("No se encontro el ID");
-        break;
+        case 1:
+            printf("No se encontro el ID");
+            retorno = -2;
+            break;
         }
-
+    }
     return retorno;
 }
-
+/** \brief  lista los musicos de un array Musico mostrando solo 3 campos
+* \param arrayMusico Array de Musico
+* \param cantidadMusico tamaño de array de Musico
+* \return void
+*
+*/
 void mus_mostrarArray2(Musico *arrayMusico, int cantidad)
 {
     int i;
@@ -241,7 +349,18 @@ void mus_mostrarArray2(Musico *arrayMusico, int cantidad)
         }
     }
 }
-
+/** \brief  Despliega un menu para modificar un musico buscado por id
+* \param arrayMusico Array de Musico
+* \param arrayInstrumentoi array de Instrumento
+* \param arrayOrquesta array de Orquesta
+* \param cantidadMusico tamaño de array de Musico
+* \param cantidadInstrumento tamaño de array de Instrumento
+* \param cantidadOrquesta tamaño de array de Orquesta
+* \return   int Return (-1) si Error [largo no valido o NULL pointer] -
+            (0) si modifica un musico correctamente - (-2) si
+            no encuentra el id
+*
+*/
 int mus_buscarEnArrayPorId(Musico *arrayMusico, int cantidad, int *musicoEncontrado,char *textoAMostrar)
 {
     int i;
@@ -262,35 +381,48 @@ int mus_buscarEnArrayPorId(Musico *arrayMusico, int cantidad, int *musicoEncontr
     }
     return retorno;
 }
-
+/** \brief  Da de baja una orquesta dejandola inhabilitada
+* \param arrayOrquesta Array de Orquesta
+* \param arrayMuscio Array de Musico
+* \param cantidadOrquesta tamaño de array de Orquesta
+* \param cantidadMusico tamaño de array de Musico
+* \return   int Return (-1) si Error [largo no valido o NULL pointer] -
+            (0) si se da de baja una orquesta correctamente
+*/
 int orq_baja(Orquesta *arrayOrquesta, Musico *arrayMusico, int cantidadOrquesta, int cantidadMusico)
 {
     int retorno = -1;
     int posicionOrquesta;
     int i;
 
-    orq_mostrarArray(arrayOrquesta, cantidadOrquesta);
-    switch (orq_buscarEnArrayPorId(arrayOrquesta, cantidadOrquesta,&posicionOrquesta,"Ingrese el Id de orquesta a dar de baja: "))
+    if( arrayMusico != NULL &&
+        arrayOrquesta != NULL &&
+        cantidadMusico > 0 &&
+        cantidadOrquesta > 0)
     {
-    case 0:
-        if (arrayOrquesta[posicionOrquesta].isEmpty == 0)
+        orq_mostrarArray(arrayOrquesta, cantidadOrquesta);
+        switch (orq_buscarEnArrayPorId(arrayOrquesta, cantidadOrquesta,&posicionOrquesta,"Ingrese el Id de orquesta a dar de baja: "))
         {
-            for(i=0;i<cantidadMusico;i++)
+        case 0:
+            if (arrayOrquesta[posicionOrquesta].isEmpty == 0)
             {
-                if(arrayMusico[i].idOrquesta == arrayOrquesta[posicionOrquesta].idOrquesta && arrayMusico[i].isEmpty == 0)
+                for(i=0;i<cantidadMusico;i++)
                 {
-                    arrayMusico[i].isEmpty = 2;
+                    if(arrayMusico[i].idOrquesta == arrayOrquesta[posicionOrquesta].idOrquesta && arrayMusico[i].isEmpty == 0)
+                    {
+                        arrayMusico[i].isEmpty = 2;
+                    }
                 }
+                printf("Hubo coincidencia\n\n");
+                arrayOrquesta[posicionOrquesta].isEmpty = 2;
+                printf("La orquesta borrada junto con sus musicos es: %d\n\n",arrayOrquesta[posicionOrquesta].idOrquesta);
+                retorno = 0;
             }
-            printf("Hubo coincidencia\n\n");
-            arrayOrquesta[posicionOrquesta].isEmpty = 2;
-            printf("La orquesta borrada junto con sus musicos es: %d\n\n",arrayOrquesta[posicionOrquesta].idOrquesta);
-            retorno = 0;
+            break;
+        case 1:
+            printf("No se encontro el codigo\n\n");
+            break;
         }
-        break;
-    case 1:
-        printf("No se encontro el codigo\n\n");
-        break;
     }
     return retorno;
 }
